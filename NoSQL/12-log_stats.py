@@ -9,16 +9,16 @@ if __name__ == "__main__":
     collection = db.nginx
 
     # Total number of logs
-    total_logs = collection.count_documents({})
+    total_logs = collection.count_documents({}) or 0
     print(f"{total_logs} logs")
 
     # HTTP methods stats
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print("Methods:")
     for method in methods:
-        count = collection.count_documents({"method": method})
+        count = collection.count_documents({"method": method}) or 0
         print(f"\tmethod {method}: {count}")
 
     # Number of GET /status requests
-    status_count = collection.count_documents({"method": "GET", "path": "/status"})
+    status_count = collection.count_documents({"method": "GET", "path": "/status"}) or 0
     print(f"{status_count} status check")
